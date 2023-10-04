@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Modelos 3D com Three.js</title>
+    <title>Cubo com Three.js e Tailwind CSS</title>
     <style>
       body {
         margin: 0;
@@ -12,12 +12,22 @@
         display: block;
       }
     </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white rounded-lg p-4 shadow-md">
+      <h1 class="text-2xl font-semibold mb-4">Cubo 3D</h1>
+      <div id="canvas-container"></div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
     <script>
       // Configuração inicial
       const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xffffff);
       const camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
@@ -25,13 +35,15 @@
         1000
       );
       const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
+      renderer.setSize(window.innerWidth * 0.6, window.innerHeight * 0.6);
+      document
+        .getElementById("canvas-container")
+        .appendChild(renderer.domElement);
 
       // Função para atualizar o tamanho da câmera ao redimensionar a janela
       window.addEventListener("resize", () => {
-        const newWidth = window.innerWidth;
-        const newHeight = window.innerHeight;
+        const newWidth = window.innerWidth * 0.6;
+        const newHeight = window.innerHeight * 0.6;
 
         camera.aspect = newWidth / newHeight;
         camera.updateProjectionMatrix();
@@ -41,8 +53,13 @@
 
       // Criação de um cubo
       const geometry = new THREE.BoxGeometry();
-      const material = new THREE.MeshBasicMaterial({ color: 0x3474eb });
+      const material = new THREE.MeshBasicMaterial({ color: 0x7703fc });
+
       const cube = new THREE.Mesh(geometry, material);
+
+      // Escala o cubo
+      cube.scale.set(3, 3, 3); // Define a escala em x, y e z para duplicar o tamanho
+
       scene.add(cube);
 
       // Movimentação da câmera
