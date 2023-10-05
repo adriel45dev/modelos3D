@@ -34,7 +34,7 @@ const material = new THREE.MeshBasicMaterial({
 const forma = new THREE.Mesh(geometry, material);
 
 // Escala da forma
-forma.scale.set(2, 2, 2); // Define a escala em x, y e z para duplicar o tamanho
+// forma.scale.set(2, 2, 2); // Define a escala em x, y e z para duplicar o tamanho
 
 scene.add(forma);
 
