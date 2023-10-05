@@ -1,12 +1,15 @@
 // Configuração inicial
 const scene = new THREE.Scene();
+
 scene.background = new THREE.Color(0xffffff);
+
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
   1000
 );
+
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth * 0.6, window.innerHeight * 0.6);
 document.getElementById("canvas-container").appendChild(renderer.domElement);
@@ -24,7 +27,7 @@ window.addEventListener("resize", () => {
 
 // Criação de uma forma
 // const geometry = new THREE.BoxGeometry();
-const geometry = formas.esfera();
+let geometry = formas.esfera();
 
 const material = new THREE.MeshBasicMaterial({
   color: 0x3293a8,
@@ -42,8 +45,8 @@ scene.add(forma);
 camera.position.z = 5;
 
 // Renderização da cena
-const animate = () => {
-  requestAnimationFrame(animate);
+const animate = (forma) => {
+  requestAnimationFrame(() => animate(forma));
 
   // Rotação da forma
   forma.rotation.x += 0.01;
@@ -52,4 +55,23 @@ const animate = () => {
   renderer.render(scene, camera);
 };
 
-animate();
+animate(forma);
+
+document.querySelectorAll(".forma").forEach((btnForma) => {
+  btnForma.addEventListener("click", (e) => {
+    const { name } = e.target;
+    const { checked } = document.querySelector(".fill");
+    scene.clear();
+
+    let material = new THREE.MeshBasicMaterial({
+      color: 0x3293a8,
+      wireframe: !checked,
+    });
+
+    let novaGeometry = formas[name]();
+    let novaForma = new THREE.Mesh(novaGeometry, material);
+    novaForma.scale.set(1.9, 1.9, 1.9);
+    scene.add(novaForma);
+    animate(novaForma);
+  });
+});

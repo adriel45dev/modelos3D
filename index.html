@@ -9,7 +9,7 @@
         overflow: hidden;
       }
       canvas {
-        display: block;
+        display: flex;
       }
     </style>
     <link
@@ -25,6 +25,44 @@
     >
       <h1 class="text-6xl font-semibold mt-4">Forma 3D</h1>
       <div id="canvas-container" class="max-w-full overflow-hidden"></div>
+
+      <div class="p-4 flex flex-row justify-center items-center gap-2">
+        <span class="font-normal text-gray-500">Preencher</span>
+        <input type="checkbox" class="fill" />
+      </div>
+
+      <div class="w-full flex justify-center items-center gap-2 flex-wrap">
+        <button
+          name="cubo"
+          class="forma bg-gray-700 text-white px-4 py-2 rounded-2xl"
+        >
+          Cubo
+        </button>
+        <button
+          name="esfera"
+          class="forma bg-gray-700 text-white px-4 py-2 rounded-2xl"
+        >
+          Esfera
+        </button>
+        <button
+          name="capsula"
+          class="forma bg-gray-700 text-white px-4 py-2 rounded-2xl"
+        >
+          Capsula
+        </button>
+        <button
+          name="cone"
+          class="forma bg-gray-700 text-white px-4 py-2 rounded-2xl"
+        >
+          Cone
+        </button>
+        <button
+          name="cilindro"
+          class="forma bg-gray-700 text-white px-4 py-2 rounded-2xl"
+        >
+          Cilindro
+        </button>
+      </div>
     </div>
     <script src="https://unpkg.com/three@0.157.0/build/three.min.js"></script>
     <script src="formas.js"></script>
