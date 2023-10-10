@@ -27,14 +27,15 @@ window.addEventListener("resize", () => {
 
 // Criação de uma forma
 // const geometry = new THREE.BoxGeometry();
-let geometry = formas.esfera();
+let novaGeometry = formas.esfera();
 
 const material = new THREE.MeshBasicMaterial({
   color: 0x3293a8,
-  wireframe: true,
+  // wireframe: true,
+  opacity: 0.1,
 });
 
-const forma = new THREE.Mesh(geometry, material);
+const forma = new THREE.Mesh(novaGeometry, material);
 
 // Escala da forma
 forma.scale.set(1.9, 1.9, 1.9); // Define a escala em x, y e z para duplicar o tamanho
@@ -61,6 +62,7 @@ document.querySelectorAll(".forma").forEach((btnForma) => {
   btnForma.addEventListener("click", (e) => {
     const { name } = e.target;
     const { checked } = document.querySelector(".fill");
+
     scene.clear();
 
     let material = new THREE.MeshBasicMaterial({
@@ -69,8 +71,10 @@ document.querySelectorAll(".forma").forEach((btnForma) => {
     });
 
     let novaGeometry = formas[name]();
+
     let novaForma = new THREE.Mesh(novaGeometry, material);
     novaForma.scale.set(1.9, 1.9, 1.9);
+
     scene.add(novaForma);
     animate(novaForma);
   });

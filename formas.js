@@ -3,6 +3,10 @@ const formas = (() => {
     return new THREE.BoxGeometry();
   };
 
+  const dodecaedro = () => {
+    return new THREE.DodecahedronGeometry(2);
+  };
+
   const capsula = () => {
     return new THREE.CapsuleGeometry(1, 2, 4, 8);
   };
@@ -25,5 +29,6 @@ const formas = (() => {
     capsula,
     cone,
     cilindro,
+    dodecaedro,
   };
 })();
